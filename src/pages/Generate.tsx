@@ -4,19 +4,21 @@ import { colorSchemes, type AspectRatio, type IThumbnail, type ThumbnailStyle } 
 import SoftBackdrop from "../components/SoftBackdrop";
 import AspectRatioSelector from "../components/AspectRatioSelector";
 import StyleSelector from "../components/StyleSelector";
-import { setStyle } from "motion";
 import ColorSchemeSelector from "../components/ColorSchemeSelector";
+import PreviewPanel from "../components/PreviewPanel";
 
 const Generate = () => {
+
   const { id } = useParams();
   const [title, setTitle] = useState("");
-  const [additionalDetails, setAdditionalDetails] = useState("");
-  const [thumbnail, setThumbnail] = useState<IThumbnail | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [additionalDetails, setAdditionalDetails] = useState("")
+
+  const [thumbnail, setThumbnail] = useState<IThumbnail | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const [aspectRatio, setAspectRatio] = useState<AspectRatio>('16:9')
   const [colorSchemeId, setColorSchemeId] = useState<string>(colorSchemes[0].id)
-  const [style, setstyle] = useState<ThumbnailStyle>('Bold & Graphic')
+  const [style, setStyle] = useState<ThumbnailStyle>('Bold & Graphic')
 
   const [styleDropdownOpen, setStyleDropdownOpen] = useState(false)
 
@@ -90,7 +92,12 @@ const Generate = () => {
               </div>
             </div>
             {/* right panel */}
-            <div></div>
+            <div>
+              <div className="p-6 rounded-2xl bg-white/8 border border-white/10 shadow-xl">
+                <h2 className="text-lg font-semibold text-zinc-100">Preview</h2>
+                <PreviewPanel thumbnail={thumbnail} isLoading={loading} aspectRatio={aspectRatio}/>
+              </div>
+            </div>
           </div>
         </main>
       </div>
